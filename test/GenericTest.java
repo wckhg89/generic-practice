@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.beans.PersistenceDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,10 +46,32 @@ public class GenericTest {
 
     }
 
-    public void printProductList (List<? extends Product> products) {
+    private void printProductList (List<? extends Product> products) {
         for (Product product : products) {
             System.out.println(product);
         }
     }
+
+
+    @Test
+    public void 복수_제네릭_테스트 () {
+        Person<EmployeeInfo, Integer> employeeInfoPerson
+                = new Person<>(new EmployeeInfo(1), 1);
+    }
+
+    @Test
+    public void 메소드_제네릭_테스트 () {
+        Person<EmployeeInfo, Integer> employeeInfoPerson
+                = new Person<>(new EmployeeInfo(1), 1);
+
+        EmployeeInfo e = new EmployeeInfo(1);
+        employeeInfoPerson.printInfo(e);
+
+        Integer i = new Integer(1);
+        employeeInfoPerson.<Integer>printInfo(i);
+
+    }
+
+
 
 }
